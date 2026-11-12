@@ -49,7 +49,11 @@ class HomeController extends Controller
     public function index()
     {
         $page = DB::table('pages')->where('id', 1)->first();
-        $blogs = Blog::where('status', 1)->whereIn('slug', Blog::ALLOWED_SLUGS)->orderBy('sort_order')->get();
+        $blogs = Blog::where('status', 1)
+        ->whereIn('slug', Blog::ALLOWED_SLUGS)
+        ->latest('created_at')
+        ->take(3)
+        ->get();
         $banner = DB::table('banners')->where('id', 1)->first();
         $testimonial = DB::table('testimonial')->where('status', 1)->get();
         $page = DB::table('pages')->where('id', 1)->first();
