@@ -756,3 +756,32 @@
         font-size: 20px;
     }
 }
+
+
+
+@media screen and (max-width: 767px) {
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .row {
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+
+    .banner img,
+    .bookcover,
+    .autho-banner {
+        max-width: 100%;
+        height: auto;
+    }
+
+}

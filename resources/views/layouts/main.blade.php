@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,28 +8,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="XyKxT65yx_qyG4hrRxWwNN5ujMbXbYPqYVE9MW1UbUo">
+
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
     @hasSection('meta_description')
         <meta name="description" content="@yield('meta_description')">
     @endif
+
     <title>@yield('title', 'Cindy Meadows Author Life Coach')</title>
+
     <link rel="canonical" href="@yield('canonical', 'https://cindymeadowsauthorlifecoach.com/' . trim(request()->path(), '/'))">
+
     <meta property="og:type" content="website">
     <meta property="og:title" content="@yield('title', 'Cindy Meadows Author Life Coach')">
+
     @hasSection('meta_description')
         <meta property="og:description" content="@yield('meta_description')">
     @endif
+
     <meta property="og:image" content="{{ asset('assets/images/author-01.jpg') }}">
     <meta property="og:url" content="@yield('canonical', 'https://cindymeadowsauthorlifecoach.com/' . trim(request()->path(), '/'))">
 
+    <!-- Resource hints: keep existing CDN connections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTP9EPVV2V"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
+
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
         gtag('config', 'G-TTP9EPVV2V');
     </script>
 
+    <!-- BookStore Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -59,6 +84,7 @@
     }
     </script>
 
+    <!-- Person Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org/",
@@ -74,15 +100,23 @@
     }
     </script>
 
+    <!-- Main CSS files -->
     @include('layouts.front.css')
+
     @yield('css')
+
 </head>
 
 <body>
 
+    <!-- Dynamic banner image: original database path preserved -->
     <style>
         @if (!empty($banner) && !empty($banner->image))
-            .banner { background-image: url('{{ asset($banner->image) }}'); }
+            <link
+                rel="preload"
+                as="image"
+                href="{{ asset($banner->image) }}"
+                fetchpriority="high">
         @endif
     </style>
 
@@ -93,6 +127,7 @@
     @include('layouts.front.footer')
 
     @include('layouts.front.scripts')
+
     @yield('js')
 
 </body>
